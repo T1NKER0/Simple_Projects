@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <cmath>
+#include <iomanip>
 using namespace std;
 
 struct Loan //Loan = Structure Tag
@@ -15,29 +16,33 @@ double rate; //annual interest rate
 int term; //length of loan in months
 };
 
-double payment (Loan loan); //prototype
+//prototypes
+void displayLoanInfo(Loan loan);
+double payment (Loan loan); 
 
 int main() 
 {
-  Loan loan1;
+  Loan loan;
   double monthlyPayment;
 
   //Initiliaze loan1 Loan Structure
   cout <<"Enter loan ID: ";
-  cin >> loan1.ID;
+  cin >> loan.ID;
 
   cout <<"Enter loan amount: $";
-  cin >> loan1.amount;
+  cin >> loan.amount;
 
   cout <<"Enter loan interest rate (annual): ";
-  cin >> loan1.rate;
+  cin >> loan.rate;
 
   cout <<"Enter loan term: ";
-  cin >> loan1.term;
+  cin >> loan.term;
 
-  monthlyPayment = payment(loan1);
+  monthlyPayment = payment(loan);
 
-  cout <<"The monthly payment for Loan #" <<loan1.ID <<" is: $"
+  displayLoanInfo(loan); //review data input
+
+  cout <<"\nThe monthly payment for Loan #"  <<fixed <<setprecision(2) <<loan.ID <<" is: $"
     <<monthlyPayment <<endl;
 
   return 0;
@@ -49,4 +54,12 @@ double payment (Loan loan)
   
   return loan.amount * loan.rate * (pow((loan.rate + 1), loan.term) / (pow((loan.rate + 1), loan.term) - 1));
   
+}
+
+void displayLoanInfo(Loan loan)
+{
+  cout <<"\n Loan ID: #" <<loan.ID; 
+  cout <<"\n Loan Amount: $" <<loan.amount;
+  cout <<"\n Loan Rate: " <<loan.rate <<"%";
+  cout <<"\n Loan Term: " <<loan.term <<" months" <<endl;
 }
